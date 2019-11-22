@@ -52,11 +52,15 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   // Tests for flattenHeapTreeToHeapArray
   it should "return empty array on empty tree" in {
     val heapTres: Tree[Int] = cse250.objects.Empty
-    assert(flattenHeapTreeToHeapArray(heapTres) sameElements Array())
+    val emptyArray: Array[Int] = Array()
+    assert(flattenHeapTreeToHeapArray(heapTres) sameElements emptyArray)
   }
   it should "return a correct array" in {
     val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
-    assert(flattenHeapTreeToHeapArray(buildHeapTreeFromHeapArray(heapArray)) sameElements  heapArray)
+    val functionArray: Array[Int] = flattenHeapTreeToHeapArray(buildHeapTreeFromHeapArray(heapArray))
+    for(i <- heapArray.indices){
+      assert(functionArray(i) == heapArray(i))
+    }
   }
   // ----
   behavior of "isValidBinaryHeap:"
