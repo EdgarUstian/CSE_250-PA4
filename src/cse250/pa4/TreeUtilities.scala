@@ -33,10 +33,16 @@ object TreeUtilities {
         Empty
       }
     }
-    makeNode(0)
+    if(heapArray.nonEmpty){
+      makeNode(0)
+    }
+    else{
+      Empty
+    }
   }
 
   def flattenHeapTreeToHeapArray[A: ClassTag](root: Tree[A]): Array[A] = {
+    
     Array()
   }
 
