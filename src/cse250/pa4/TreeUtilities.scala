@@ -24,8 +24,16 @@ import scala.reflect.ClassTag
 
 object TreeUtilities {
   def buildHeapTreeFromHeapArray[A](heapArray: Array[A]): Tree[A] = {
-    
-    Empty
+    val arraySize = heapArray.length
+    def makeNode(indX: Int): Tree[A] ={
+      if(indX < arraySize){
+        Node[A](heapArray(indX), makeNode(2*indX + 1), makeNode(2*indX + 2))
+      }
+      else{
+        Empty
+      }
+    }
+    makeNode(0)
   }
 
   def flattenHeapTreeToHeapArray[A: ClassTag](root: Tree[A]): Array[A] = {
