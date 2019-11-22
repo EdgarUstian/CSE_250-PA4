@@ -16,7 +16,7 @@ import cse250.objects.Tree
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
+    val heapArray = Array(10,5,4,3,1,2,0,-2,4)
     val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
     println(s"Heap Tree: $heapTree")
     println(s"Heap as array: ${heapArray.toSeq}")
