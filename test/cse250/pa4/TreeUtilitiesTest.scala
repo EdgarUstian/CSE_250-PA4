@@ -71,8 +71,18 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   // ----
   behavior of "applyTree:"
   // Tests for flattenHeapTreeToHeapArray
-  it should "work" in {
+  it should "return None for empty tree" in {
+    val heapTres: Tree[Int] = cse250.objects.Empty
+    assert(applyTree(heapTres, 0).isEmpty)
+  }
 
+  it should "return every index properly" in {
+    val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
+    val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
+    for (i <- heapArray.indices) {
+      val valueAtIndex = TreeUtilities.applyTree(heapTree,i)
+      assert(valueAtIndex.contains(heapArray(i)))
+    }
   }
   // ----
   behavior of "updateHeap:"

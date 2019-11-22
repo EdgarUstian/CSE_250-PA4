@@ -59,7 +59,45 @@ object TreeUtilities {
   }
 
   def applyTree[A](root: Tree[A], index: Int): Option[A] = {
-    None
+    var path: Array[Double] = Array()
+    var indX: Double = index
+    while(indX >= 0){//Should be O(log(n))
+      if(indX != 0){
+        path :+= indX
+      }
+      indX = (indX -2) / 2
+      if(indX > indX.toInt){
+        indX += 0.5
+      }
+    }
+    path = path.reverse
+
+    var start: Tree[A] = root
+    if(path.nonEmpty){
+      for(node <- path){
+        if(node % 2 == 1){//Odd
+          //Goto left
+          if(start.left.isDefined){
+            start = start.left.get
+          }
+          else{
+            return None
+          }
+        }
+        else{
+          if(start.right.isDefined){
+            start = start.right.get
+          }
+          else{
+            return None
+          }
+        }
+      }
+      start.value
+    }
+    else{
+      None
+    }
   }
 
   def updateHeap[A](root: Tree[A], index: Int, elem: A)(implicit comp: Ordering[A]): Tree[A] = {
