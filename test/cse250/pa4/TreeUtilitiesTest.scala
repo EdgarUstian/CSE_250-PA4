@@ -18,7 +18,8 @@
 
 package cse250.pa4
 
-import cse250.pa4.TreeUtilities
+import cse250.pa4.TreeUtilities._
+import cse250.objects._
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 
 import scala.collection.View.Empty
@@ -29,7 +30,7 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   // Tests for buildHeapTreeFromHeapArray
   it should "return Empty on empty array" in {
     val emptyHeapArray:Array[Int] = Array()
-    assert(buildHeapTreeFromHeapArray(emptyHeapArray) == Empty)
+    assert(buildHeapTreeFromHeapArray(emptyHeapArray) == cse250.objects.Empty)
   }
 
   it should "work" in {
