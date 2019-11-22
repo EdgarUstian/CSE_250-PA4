@@ -18,8 +18,8 @@
 
 package cse250.pa4
 
+import cse250.objects.{Empty, Node, Tree}
 import cse250.pa4.TreeUtilities._
-import cse250.objects._
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 
 import scala.collection.View.Empty
@@ -34,7 +34,16 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   }
 
   it should "work" in {
-
+    val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
+    val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
+    val heapTres: Tree[Int] = Node(10,
+      Node(5,
+        Node(3,Node(-2,cse250.objects.Empty,cse250.objects.Empty),Node(-4,cse250.objects.Empty,cse250.objects.Empty)),
+        Node(1,cse250.objects.Empty,cse250.objects.Empty)),
+      Node(4,
+        Node(2,cse250.objects.Empty,cse250.objects.Empty),
+        Node(0,cse250.objects.Empty,cse250.objects.Empty)))
+    assert(heapTree == heapTres)
   }
   // ----
   behavior of "flattenHeapTreeToHeapArray:"
