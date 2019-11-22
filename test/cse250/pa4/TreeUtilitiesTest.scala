@@ -84,6 +84,15 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
       assert(valueAtIndex.contains(heapArray(i)))
     }
   }
+
+  it should "return None for incorrect index" in {
+    val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
+    val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
+    assert(applyTree(heapTree, -5).isEmpty)
+    assert(applyTree(heapTree, 20).isEmpty)
+    assert(applyTree(heapTree, 200).isEmpty)
+    assert(applyTree(heapTree, -200).isEmpty)
+  }
   // ----
   behavior of "updateHeap:"
   // Tests for flattenHeapTreeToHeapArray
