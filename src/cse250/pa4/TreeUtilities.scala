@@ -25,17 +25,25 @@ import scala.reflect.ClassTag
 object TreeUtilities {
   def buildHeapTreeFromHeapArray[A](heapArray: Array[A]): Tree[A] = {
     val arraySize = heapArray.length
-    def makeNode(indX: Int): Tree[A] = {
-      if(indX < arraySize) Node[A](heapArray(indX), makeNode(2*indX + 1), makeNode(2*indX + 2))
+    def makeTree(indX: Int): Tree[A] = {
+      if(indX < arraySize) Node[A](heapArray(indX), makeTree(2*indX + 1), makeTree(2*indX + 2))
       else Empty
     }
-    if(heapArray.nonEmpty) makeNode(0)
+    if(heapArray.nonEmpty) makeTree(0)
     else Empty
   }
 
   def flattenHeapTreeToHeapArray[A: ClassTag](root: Tree[A]): Array[A] = {
-
-    Array()
+    def makeArray(root: Tree[A]): Array[A] = {
+      val heapArray: Array[A] = Array()
+      if(root != Empty){
+        heapArray :+ root.value
+        makeArray(root.left.get)
+        makeArray(root.right.get)
+      }
+      heapArray
+    }
+    makeArray(root)
   }
 
   def isValidBinaryHeap[A](root: Tree[A])(implicit comp: Ordering[A]): Boolean = {
