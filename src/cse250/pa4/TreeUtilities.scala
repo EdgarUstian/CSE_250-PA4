@@ -73,7 +73,10 @@ object TreeUtilities {
     path = path.reverse
 
     var start: Tree[A] = root
-    if(path.nonEmpty){
+    if(index == 0){
+      start.value
+    }
+    else if(path.nonEmpty){
       for(node <- path){
         if(node % 2 == 1){//Odd
           //Goto left
