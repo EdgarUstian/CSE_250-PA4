@@ -55,7 +55,24 @@ object TreeUtilities {
   }
 
   def isValidBinaryHeap[A](root: Tree[A])(implicit comp: Ordering[A]): Boolean = {
-    false
+    //Helper Functions
+    def size(root: Tree[A]): Int = {//Finds size of tree
+      if(root.value.isDefined) 1 + size(root.left.get) + size(root.right.get)
+      else 0
+    }
+    println("SIZE: " + size(root))
+    def checkComplete(root: Tree[A], indX: Int, size: Int): Boolean = {//Check the tree for proper creation
+      if (root.value.isEmpty) true else if (indX >= size) false else checkComplete(root.left.get, 2 * indX + 1, size) && checkComplete(root.right.get, 2 * indX + 2, size)
+    }
+    println("COMPLETE TREE: " + checkComplete(root, 0, size(root)))
+    def checkHeap(root: Tree[A]): Boolean = {//Checks the proper value
+      if(root.left.get.value.isEmpty && root.right.get.value.isEmpty) true
+      else if(root.right.get.value.isEmpty) comp.gteq(root.value.get, root.left.get.value.get)
+      else if (comp.gteq(root.value.get, root.left.get.value.get) && comp.gteq(root.value.get, root.right.get.value.get)) checkHeap(root.left.get) && checkHeap(root.right.get)
+      else false
+    }
+    println("CORRECT HEAP: " + checkHeap(root))
+    if(checkComplete(root, 0, size(root)) && checkHeap(root)) true else false
   }
 
   def applyTree[A](root: Tree[A], index: Int): Option[A] = {
