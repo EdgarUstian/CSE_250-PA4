@@ -18,13 +18,13 @@ object Main {
   def main(args: Array[String]): Unit = {
     val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
     val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
-    println(heapTree)
+    println(s"Heap Tree: $heapTree")
     println(s"Heap as array: ${heapArray.toSeq}")
     println(s"Heap as tree:  ${TreeUtilities.flattenHeapTreeToHeapArray(heapTree).toSeq}")
 
     for (i <- heapArray.indices) {
       val valueAtIndex = TreeUtilities.applyTree(heapTree,i)
-      println(s"Expected: ${Some(heapArray(i))}, Got: ${valueAtIndex}")
+      println(s"Expected: ${Some(heapArray(i))}, Got: $valueAtIndex")
     }
     println(s"Index -1: ${TreeUtilities.applyTree(heapTree,-1)}")
     println(s"Index ${heapArray.length}: ${TreeUtilities.applyTree(heapTree,heapArray.length)}")

@@ -18,7 +18,7 @@
 
 package cse250.pa4
 
-import cse250.objects.{Empty, Node, Tree}
+import cse250.objects.{Node, Tree}
 import cse250.pa4.TreeUtilities._
 import org.scalatest.{BeforeAndAfter, FlatSpec}
 
@@ -50,8 +50,13 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   // ----
   behavior of "flattenHeapTreeToHeapArray:"
   // Tests for flattenHeapTreeToHeapArray
-  it should "work" in {
-
+  it should "return empty array on empty tree" in {
+    val heapTres: Tree[Int] = cse250.objects.Empty
+    assert(flattenHeapTreeToHeapArray(heapTres) sameElements Array())
+  }
+  it should "return a correct array" in {
+    val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
+    assert(flattenHeapTreeToHeapArray(buildHeapTreeFromHeapArray(heapArray)) sameElements  heapArray)
   }
   // ----
   behavior of "isValidBinaryHeap:"

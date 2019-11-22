@@ -34,16 +34,26 @@ object TreeUtilities {
   }
 
   def flattenHeapTreeToHeapArray[A: ClassTag](root: Tree[A]): Array[A] = {
-    def makeArray(root: Tree[A]): Array[A] = {
-      val heapArray: Array[A] = Array()
-      if(root != Empty){
-        heapArray :+ root.value
-        makeArray(root.left.get)
-        makeArray(root.right.get)
+    var heapArray: Array[A] = Array()
+    var queue: mutable.Queue[Tree[A]] = mutable.Queue()
+    var explored: mutable.Seq[Tree[A]] = mutable.Seq()
+    if(root != Empty){
+      queue.enqueue(root)
+      explored :+ root
+      while(queue.nonEmpty){
+        val node = queue.dequeue()
+        val left = node.left.get
+        val right = node.right.get
+        heapArray :+= node.value.get
+        if(left != Empty && !explored.contains(left)){
+          queue.enqueue(left)
+        }
+        if(right != Empty && !explored.contains(right)){
+          queue.enqueue(right)
+        }
       }
-      heapArray
     }
-    makeArray(root)
+    heapArray
   }
 
   def isValidBinaryHeap[A](root: Tree[A])(implicit comp: Ordering[A]): Boolean = {
