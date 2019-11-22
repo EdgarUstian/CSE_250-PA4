@@ -33,12 +33,14 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
     assert(buildHeapTreeFromHeapArray(emptyHeapArray) == cse250.objects.Empty)
   }
 
-  it should "work" in {
+  it should "return a correct tree" in {
     val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
     val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
     val heapTres: Tree[Int] = Node(10,
       Node(5,
-        Node(3,Node(-2,cse250.objects.Empty,cse250.objects.Empty),Node(-4,cse250.objects.Empty,cse250.objects.Empty)),
+        Node(3,
+          Node(-2,cse250.objects.Empty,cse250.objects.Empty),
+          Node(-4,cse250.objects.Empty,cse250.objects.Empty)),
         Node(1,cse250.objects.Empty,cse250.objects.Empty)),
       Node(4,
         Node(2,cse250.objects.Empty,cse250.objects.Empty),
