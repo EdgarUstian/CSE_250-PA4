@@ -65,7 +65,7 @@ class TreeUtilitiesTest extends FlatSpec with BeforeAndAfter {
   // ----
   behavior of "isValidBinaryHeap:"
   // Tests for flattenHeapTreeToHeapArray
-  it should "return true on proper tree" = {
+  it should "return true on proper tree" in {
     val heapArray = Array(10,5,4,3,1,2,0,-2,-4)
     val heapTree = TreeUtilities.buildHeapTreeFromHeapArray(heapArray)
     assert(isValidBinaryHeap(heapTree))

@@ -136,6 +136,6 @@ object TreeUtilities {
   }
 
   def updateHeap[A](root: Tree[A], index: Int, elem: A)(implicit comp: Ordering[A]): Tree[A] = {
-    root
+    Empty
   }
 }
