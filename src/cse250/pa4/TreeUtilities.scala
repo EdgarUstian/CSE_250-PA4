@@ -36,19 +36,17 @@ object TreeUtilities {
   def flattenHeapTreeToHeapArray[A: ClassTag](root: Tree[A]): Array[A] = {
     var heapArray: Array[A] = Array()
     var queue: mutable.Queue[Tree[A]] = mutable.Queue()
-    var explored: mutable.Seq[Tree[A]] = mutable.Seq()
     if(root != Empty){
       queue.enqueue(root)
-      explored :+ root
       while(queue.nonEmpty){
         val node = queue.dequeue()
         val left = node.left.get
         val right = node.right.get
         heapArray :+= node.value.get
-        if(left != Empty && !explored.contains(left)){
+        if(left != Empty){
           queue.enqueue(left)
         }
-        if(right != Empty && !explored.contains(right)){
+        if(right != Empty){
           queue.enqueue(right)
         }
       }
