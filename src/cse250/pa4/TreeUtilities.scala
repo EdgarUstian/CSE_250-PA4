@@ -66,13 +66,28 @@ object TreeUtilities {
     }
     println("COMPLETE TREE: " + checkComplete(root, 0, size(root)))
     def checkHeap(root: Tree[A]): Boolean = {//Checks the proper value
-      if(root.left.get.value.isEmpty && root.right.get.value.isEmpty) true
-      else if(root.right.get.value.isEmpty) comp.gteq(root.value.get, root.left.get.value.get)
+      if(root.left.get.value.isEmpty && root.right.get.value.isEmpty) true //Both children are empty
+      else if (root.right.get.value.isEmpty) comp.gteq(root.value.get, root.left.get.value.get) //One child is empty
       else if (comp.gteq(root.value.get, root.left.get.value.get) && comp.gteq(root.value.get, root.right.get.value.get)) checkHeap(root.left.get) && checkHeap(root.right.get)
       else false
     }
-    println("CORRECT HEAP: " + checkHeap(root))
-    if(checkComplete(root, 0, size(root)) && checkHeap(root)) true else false
+    if(checkComplete(root, 0, size(root))){
+      if(size(root) == 0){
+        println("CORRECT HEAP: true")
+      }
+      else{
+        println("CORRECT HEAP: " + checkHeap(root))
+      }
+    }
+    else{
+      println("CORRECT HEAP: false")
+    }
+    if(root == Empty){
+      true
+    }
+    else{
+      if(checkComplete(root, 0, size(root)) && checkHeap(root)) true else false
+    }
   }
 
   def applyTree[A](root: Tree[A], index: Int): Option[A] = {
